@@ -8,18 +8,31 @@ function UsersList({ users }) {
   const dispatch = useDispatch();
   const { usersBackUp } = useSelector((state) => state);
   const [inputValue, setInputValue] = useState('');
-  const handleChange = (e) => setInputValue(e.target.value);
+
   const resetSearch = () => setInputValue('');
-  const handleOnKeyDown = (e) => {
-    if (e.keyCode === 13) doSearch();
-  };
+  const [hideSearchIcon, setHideSearchIcon] = useState(false);
+
   const doSearch = () => {
     dispatch(
       sortData(
         usersBackUp.filter((item) => item?.name?.toLowerCase().includes(inputValue.toLowerCase()))
       )
     );
+    setHideSearchIcon(true);
+  };
+
+  const clearSearch = () => {
     resetSearch();
+    dispatch(sortData(usersBackUp));
+    setHideSearchIcon(false);
+  };
+
+  const handleOnKeyDown = (e) => {
+    if (e.keyCode === 13) doSearch();
+  };
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+    e.target.value === '' && clearSearch();
   };
   return (
     <div className='dashboard-container'>
@@ -34,7 +47,11 @@ function UsersList({ users }) {
             onChange={handleChange}
             onKeyDown={handleOnKeyDown}
           />
-          <i className='ri-search-line' onClick={doSearch}></i>
+          {hideSearchIcon ? (
+            <i class='ri-close-line' onClick={clearSearch}></i>
+          ) : (
+            <i className='ri-search-line' onClick={doSearch}></i>
+          )}
         </div>
       </div>
       <div className='users-container'>
@@ -49,6 +66,7 @@ function UsersList({ users }) {
         {users?.map((user, index) => (
           <UserCard user={user} key={index} />
         ))}
+        {users && users.length === 0 && <p className='messageSearch'>no se encontraron usuarios</p>}
       </div>
     </div>
   );

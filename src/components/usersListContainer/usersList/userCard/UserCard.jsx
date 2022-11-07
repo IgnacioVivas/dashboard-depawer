@@ -2,12 +2,14 @@ import axios from 'axios';
 import React from 'react';
 
 function UserCard({ user }) {
-  const validateUser = async (id, userId, title, body) => {
+  const validateUser = async () => {
     try {
       const { data } = await axios.put(
         `https://dpower-production.up.railway.app/users/${user.id}`,
         {
-          validated: user.validated,
+          ...user,
+          validated: !user.validated,
+          sport: 'deporte nuevo',
         }
       );
       console.log(data);
@@ -15,7 +17,6 @@ function UserCard({ user }) {
       console.log(error);
     }
   };
-  validateUser({ validated: !user.validated });
   return (
     <>
       <div className='celda-container'>
