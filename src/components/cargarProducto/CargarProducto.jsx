@@ -4,12 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postProducts } from '../../redux/actions/index';
-
-// const PostProducts = (values) => {
-//   axios.post(`https://dpower-production.up.railway.app/products`, values)
-//   .then(resp => alert('Product created!'))
-//   .catch(error => alert(error))
-// };
+import swal from 'sweetalert';
 
 function Cargarproducto() {
   const dispatch = useDispatch();
@@ -45,7 +40,12 @@ function Cargarproducto() {
       imageUrl: '',
       description: '',
     });
-    alert('Producto Publicado!');
+    // alert('Producto Publicado!');
+    swal('el producto fue creado exitosamente!', {
+      buttons: false,
+      icon: 'success',
+      timer: 3000,
+    });
   }
 
   function handleChange(e) {

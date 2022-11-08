@@ -27,12 +27,11 @@ function Login() {
     ) {
       goToDashboard();
     } else {
-      // swal({
-      //   title: 'Good job!',
-      //   text: 'You clicked the button!',
-      //   icon: 'warning',
-      //   button: 'Aww yiss!',
-      // });
+      swal('Los datos ingresados no son correctos o son incompletos!', {
+        buttons: false,
+        icon: 'error',
+        timer: 3000,
+      });
     }
   };
   return (

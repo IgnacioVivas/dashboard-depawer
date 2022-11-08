@@ -8,8 +8,8 @@ function UserCard({ user }) {
         `https://dpower-production.up.railway.app/users/${user.id}`,
         {
           ...user,
-          validated: !user.validated,
-          sport: 'deporte nuevo',
+          validated: true,
+          nationality: 'argentino',
         }
       );
       console.log(data);
