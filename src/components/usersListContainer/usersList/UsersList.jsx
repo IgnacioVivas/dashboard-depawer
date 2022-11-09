@@ -4,7 +4,7 @@ import { sortData } from '../../../redux/actions';
 import UserCard from './userCard/UserCard';
 import './userList.scss';
 
-function UsersList({ users }) {
+function UsersList({ users, updateInfo }) {
   const dispatch = useDispatch();
   const { usersBackUp } = useSelector((state) => state);
   const [inputValue, setInputValue] = useState('');
@@ -64,7 +64,7 @@ function UsersList({ users }) {
           </div>
         </div>
         {users?.map((user, index) => (
-          <UserCard user={user} key={index} />
+          <UserCard user={user} key={index} updateInfo={updateInfo} />
         ))}
         {users && users.length === 0 && <p className='messageSearch'>no se encontraron usuarios</p>}
       </div>

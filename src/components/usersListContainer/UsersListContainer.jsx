@@ -5,13 +5,19 @@ import UsersList from './usersList/UsersList';
 
 function UsersListContainer() {
   const dispatch = useDispatch();
+  // const [updateValidated, setUpdateValidated] = useState(null);
   const { users } = useSelector((state) => state);
-  useEffect(() => {
+
+  const getUsers = () => {
     dispatch(getAllUsers());
+  };
+
+  useEffect(() => {
+    getUsers();
   }, []);
   return (
     <>
-      <UsersList users={users} />
+      <UsersList users={users} updateInfo={getUsers} />
     </>
   );
 }

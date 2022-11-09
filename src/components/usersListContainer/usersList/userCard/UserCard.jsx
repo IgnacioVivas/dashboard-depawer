@@ -1,18 +1,17 @@
 import axios from 'axios';
 import React from 'react';
 
-function UserCard({ user }) {
+function UserCard({ user, updateInfo }) {
   const validateUser = async () => {
     try {
       const { data } = await axios.put(
         `https://dpower-production.up.railway.app/users/${user.id}`,
         {
           ...user,
-          validated: true,
-          nationality: 'argentino',
+          validated: !user.validated,
         }
       );
-      console.log(data);
+      updateInfo();
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +23,7 @@ function UserCard({ user }) {
           <span>{user?.name}</span>
         </div>
         <div className='celda'>
-          <span>{user?.validated ? 'true' : 'false'}</span>
+          <span>{user?.validated ? 'Aprobado' : 'Rechazado'}</span>
           <i className='ri-edit-2-line' onClick={validateUser}></i>
         </div>
       </div>
