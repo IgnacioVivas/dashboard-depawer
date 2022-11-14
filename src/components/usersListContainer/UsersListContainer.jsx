@@ -5,7 +5,6 @@ import UsersList from './usersList/UsersList';
 
 function UsersListContainer() {
   const dispatch = useDispatch();
-  // const [updateValidated, setUpdateValidated] = useState(null);
   const { users } = useSelector((state) => state);
 
   const getUsers = () => {

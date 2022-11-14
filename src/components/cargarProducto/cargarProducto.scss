@@ -17,7 +17,7 @@
     text-transform: uppercase;
     margin-bottom: 80px;
   }
-  button {
+  .btn {
     background-color: #ffffff;
     border-width: 0px;
     border-top-left-radius: 4px;
@@ -50,7 +50,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    input {
+    .camposInput {
+      text-align: initial;
       background-color: #f6f6f6;
       border-color: #dddddd;
       width: 18rem;

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { sortData } from '../../../redux/actions';
-import UserCard from './userCard/UserCard';
-import './userList.scss';
+import { sortProducts } from '../../../redux/actions';
+import ProductCard from './productCard/ProductCard';
 
-function UsersList({ users, updateInfo }) {
+function ProductsList({ products, getProducts }) {
   const dispatch = useDispatch();
-  const { usersBackUp } = useSelector((state) => state);
+  const { productsBackUp } = useSelector((state) => state);
   const [inputValue, setInputValue] = useState('');
   const [hideSearchIcon, setHideSearchIcon] = useState(false);
 
@@ -14,8 +13,10 @@ function UsersList({ users, updateInfo }) {
 
   const doSearch = () => {
     dispatch(
-      sortData(
-        usersBackUp.filter((item) => item?.name?.toLowerCase().includes(inputValue.toLowerCase()))
+      sortProducts(
+        productsBackUp.filter((item) =>
+          item?.name?.toLowerCase().includes(inputValue.toLowerCase())
+        )
       )
     );
     setHideSearchIcon(true);
@@ -23,7 +24,7 @@ function UsersList({ users, updateInfo }) {
 
   const clearSearch = () => {
     resetSearch();
-    dispatch(sortData(usersBackUp));
+    dispatch(sortProducts(productsBackUp));
     setHideSearchIcon(false);
   };
 
@@ -37,11 +38,11 @@ function UsersList({ users, updateInfo }) {
   return (
     <div className='dashboard-container'>
       <div className='search-container'>
-        <h1>aprobar usuarios</h1>
+        <h1>Todos los productos</h1>
         <div className='input-container'>
           <input
             type='text'
-            placeholder='search user'
+            placeholder='search product'
             name='searchValue'
             value={inputValue}
             onChange={handleChange}
@@ -57,19 +58,18 @@ function UsersList({ users, updateInfo }) {
       <div className='users-container'>
         <div className='celda-container'>
           <div className='celda'>
-            <span className='title-celda'>usuarios</span>
-          </div>
-          <div className='celda'>
-            <span className='title-celda'>Aprobar</span>
+            <span className='title-celda'>Productos</span>
           </div>
         </div>
-        {users?.map((user, index) => (
-          <UserCard user={user} key={index} updateInfo={updateInfo} />
+        {products?.map((product, index) => (
+          <ProductCard product={product} key={index} getProducts={getProducts} />
         ))}
-        {users && users.length === 0 && <p className='messageSearch'>no se encontraron usuarios</p>}
+        {products && products.length === 0 && (
+          <p className='messageSearch'>no se encontraron productos</p>
+        )}
       </div>
     </div>
   );
 }
 
-export default UsersList;
+export default ProductsList;

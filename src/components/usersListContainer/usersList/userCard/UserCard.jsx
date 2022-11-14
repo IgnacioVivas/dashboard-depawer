@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import ToggleSwitch from '../../../toggleSwitch/ToggleSwitch';
 
 function UserCard({ user, updateInfo }) {
   const validateUser = async () => {
@@ -23,8 +24,9 @@ function UserCard({ user, updateInfo }) {
           <span>{user?.name}</span>
         </div>
         <div className='celda'>
-          <span>{user?.validated ? 'Aprobado' : 'Rechazado'}</span>
-          <i className='ri-edit-2-line' onClick={validateUser}></i>
+          {/* <span>{user?.validated ? 'Aprobado' : 'Rechazado'}</span> */}
+          {/* <i className='ri-edit-2-line' onClick={validateUser}></i> */}
+          <ToggleSwitch validateUser={validateUser} user={user} />
         </div>
       </div>
     </>

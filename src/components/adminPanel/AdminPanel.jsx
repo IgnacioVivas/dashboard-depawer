@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import './adminPanel.scss';
 import UsersListContainer from '../usersListContainer/UsersListContainer';
+import ProductsListContainer from '../productsListContainer/ProductsListContainer';
 
 function AdminPanel() {
   return (
@@ -13,6 +14,7 @@ function AdminPanel() {
       <Routes>
         <Route path='/aprobar-usuarios' element={<UsersListContainer />} />
         <Route path='/cargar-producto' element={<Cargarproducto />} />
+        <Route path='/productos' element={<ProductsListContainer />} />
       </Routes>
     </div>
   );
