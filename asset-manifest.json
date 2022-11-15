@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/dashboard-depawer/static/css/main.fc7e3f65.css",
+    "main.js": "/dashboard-depawer/static/js/main.7f6ae90b.js",
+    "static/js/787.12d09fac.chunk.js": "/dashboard-depawer/static/js/787.12d09fac.chunk.js",
+    "static/media/remixicon.svg?t=1590207869815": "/dashboard-depawer/static/media/remixicon.9cedd2150922ead84869.svg",
+    "static/media/remixicon.eot?t=1590207869815": "/dashboard-depawer/static/media/remixicon.5cb99e6cba5a4619063f.eot",
+    "static/media/remixicon.ttf?t=1590207869815": "/dashboard-depawer/static/media/remixicon.f2616f597cf98f38d234.ttf",
+    "static/media/remixicon.woff?t=1590207869815": "/dashboard-depawer/static/media/remixicon.8d09fa11700ed63cf96e.woff",
+    "static/media/remixicon.woff2?t=1590207869815": "/dashboard-depawer/static/media/remixicon.90668f6f9b3c2c18a090.woff2",
+    "static/media/section-menu-background.png": "/dashboard-depawer/static/media/section-menu-background.f1949287b6b625cbb286.png",
+    "static/media/logo-depawer.png": "/dashboard-depawer/static/media/logo-depawer.002cbbb793c84579e47c.png",
+    "index.html": "/dashboard-depawer/index.html",
+    "main.fc7e3f65.css.map": "/dashboard-depawer/static/css/main.fc7e3f65.css.map",
+    "main.7f6ae90b.js.map": "/dashboard-depawer/static/js/main.7f6ae90b.js.map",
+    "787.12d09fac.chunk.js.map": "/dashboard-depawer/static/js/787.12d09fac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc7e3f65.css",
+    "static/js/main.7f6ae90b.js"
+  ]
+}
