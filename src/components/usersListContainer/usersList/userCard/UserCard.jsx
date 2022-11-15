@@ -16,7 +16,7 @@ function UserCard({ user, updateInfo, getUsers, key, loading, setLoading }) {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 2500);
+      }, 1500);
     } catch (error) {
       console.log(error);
     }
