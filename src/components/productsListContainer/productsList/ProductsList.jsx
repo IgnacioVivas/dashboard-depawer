@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortProducts } from '../../../redux/actions';
+import Pagination from '../../pagination/Pagination';
 import ProductCard from './productCard/ProductCard';
 
-function ProductsList({ products, getProducts }) {
+function ProductsList({ products, getProducts, postsPerPage, paginate, currentProducts }) {
   const dispatch = useDispatch();
   const { productsBackUp } = useSelector((state) => state);
   const [inputValue, setInputValue] = useState('');
@@ -61,13 +62,14 @@ function ProductsList({ products, getProducts }) {
             <span className='title-celda'>Productos</span>
           </div>
         </div>
-        {products?.map((product, index) => (
+        {currentProducts?.map((product, index) => (
           <ProductCard product={product} key={index} getProducts={getProducts} />
         ))}
-        {products && products.length === 0 && (
+        {currentProducts && currentProducts.length === 0 && (
           <p className='messageSearch'>no se encontraron productos</p>
         )}
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts={products.length} paginate={paginate} />
     </div>
   );
 }

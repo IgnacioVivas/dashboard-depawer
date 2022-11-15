@@ -17,13 +17,17 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
     }
     links[index].style.color = '#C5ABA5';
   };
-
+  console.log(pageNumbers);
   return (
     <nav className='pagination-container'>
       <ul className='pagination' id='pagination'>
         {pageNumbers.map((number) => (
           <li className='page-item' key={number}>
-            <Link to={`/home`} onClick={() => setNewPageSelected(number)} className='page-link'>
+            <Link
+              to={`/dashboard/productos`}
+              onClick={() => setNewPageSelected(number)}
+              className='page-link'
+            >
               {number}
             </Link>
           </li>

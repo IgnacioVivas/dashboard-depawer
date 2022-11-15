@@ -1,10 +1,19 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortData } from '../../../redux/actions';
+import Pagination from '../../pagination/Pagination';
 import UserCard from './userCard/UserCard';
 import './userList.scss';
 
-function UsersList({ users, updateInfo }) {
+function UsersList({
+  users,
+  updateInfo,
+  postsPerPage,
+  paginate,
+  currentUsers,
+  loading,
+  setLoading,
+}) {
   const dispatch = useDispatch();
   const { usersBackUp } = useSelector((state) => state);
   const [inputValue, setInputValue] = useState('');
@@ -63,11 +72,20 @@ function UsersList({ users, updateInfo }) {
             <span className='title-celda'>Aprobar</span>
           </div>
         </div>
-        {users?.map((user, index) => (
-          <UserCard user={user} key={index} updateInfo={updateInfo} />
+        {currentUsers?.map((user, index) => (
+          <UserCard
+            user={user}
+            key={index}
+            updateInfo={updateInfo}
+            loading={loading}
+            setLoading={setLoading}
+          />
         ))}
-        {users && users.length === 0 && <p className='messageSearch'>no se encontraron usuarios</p>}
+        {currentUsers && currentUsers.length === 0 && (
+          <p className='messageSearch'>no se encontraron usuarios</p>
+        )}
       </div>
+      <Pagination postsPerPage={postsPerPage} totalPosts={users.length} paginate={paginate} />
     </div>
   );
 }

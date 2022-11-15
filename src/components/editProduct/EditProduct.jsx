@@ -46,14 +46,30 @@ function EditProduct({ product, modal, setModal }) {
       (error, result) => {
         if (!error && result && result.event === 'success') {
           console.log('Done! Here is the image info: ', result.info.secure_url);
-          setImageUrl(result.info.secure_url);
+          if (result.info.secure_url === null) {
+            setImageUrl(product.image);
+          } else {
+            setImageUrl(result.info.secure_url);
+          }
         } else if (error) {
           console.log('parece que hubo un error: ', error);
         }
       }
     );
   }
-
+  const validate = (inputValue) => {
+    let errors = {};
+    if (!inputValue.name) errors.name = 'el nombre es requerido';
+    if (!inputValue.price) errors.price = 'el precio es requerido';
+    if (!inputValue.category) errors.category = 'la categoria es requerida';
+    if (!inputValue.stock) errors.stock = 'el stock es requerido';
+    if (!inputValue.published) errors.published = 'published es requerido';
+    if (!inputValue.image) errors.image = 'la imagen es requerida';
+    if (!inputValue.description) errors.description = 'la descripcion es requerida';
+    return errors;
+  };
+  console.log(product.image);
+  const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: product.name,
     price: product.price,
@@ -66,32 +82,40 @@ function EditProduct({ product, modal, setModal }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    const formValues = {
+      ...input,
+      [e.target.name]: e.target.value,
+    };
+    setErrors(validate(formValues));
     const editar = {
       name: input.name,
       price: input.price,
       category: input.category,
       stock: input.stock,
       published: input.published,
-      image: imageUrl,
+      image: product.image,
       description: input.description,
     };
-    dispatch(editProduct(editar, product.id));
+    if (Object.keys(validate(formValues)).length === 0) {
+      dispatch(editProduct(editar, product.id));
 
-    setInput({
-      name: '',
-      price: '',
-      category: '',
-      stock: '',
-      published: '',
-      image: '',
-      description: '',
-    });
-    swal('el producto fue editado exitosamente!', {
-      buttons: false,
-      icon: 'success',
-      timer: 3000,
-    });
-    setModal(!modal);
+      setInput({
+        name: '',
+        price: '',
+        category: '',
+        stock: '',
+        published: '',
+        image: '',
+        description: '',
+      });
+      swal('el producto fue editado exitosamente!', {
+        buttons: false,
+        icon: 'success',
+        timer: 3000,
+      });
+      setModal(!modal);
+    }
   }
 
   function handleChange(e) {
@@ -109,7 +133,7 @@ function EditProduct({ product, modal, setModal }) {
         <div className='separador'>
           <div className='name'>
             <input
-              className='camposInput'
+              className={`camposInput  ${errors.name && 'danger'}`}
               placeholder='nombre'
               type='name'
               name='name'
@@ -117,10 +141,11 @@ function EditProduct({ product, modal, setModal }) {
               value={input.name}
               onChange={(e) => handleChange(e)}
             />
+            {errors.name && <p className='danger'>{errors.name}</p>}
           </div>
           <div className='content-price'>
             <input
-              className='camposInput'
+              className={`camposInput  ${errors.name && 'danger'}`}
               placeholder='precio'
               type='number'
               name='price'
@@ -129,10 +154,11 @@ function EditProduct({ product, modal, setModal }) {
               value={input.price}
               onChange={(e) => handleChange(e)}
             />
+            {errors.name && <p className='danger'>{errors.name}</p>}
           </div>
           <div>
             <input
-              className='camposInput'
+              className={`camposInput  ${errors.category && 'danger'}`}
               placeholder='categoria'
               type='text'
               name='category'
@@ -140,10 +166,11 @@ function EditProduct({ product, modal, setModal }) {
               value={input.category}
               onChange={(e) => handleChange(e)}
             />
+            {errors.name && <p className='danger'>{errors.category}</p>}
           </div>
           <div className='stock'>
             <input
-              className='camposInput'
+              className={`camposInput  ${errors.stock && 'danger'}`}
               placeholder='stock'
               type='number'
               name='stock'
@@ -151,12 +178,13 @@ function EditProduct({ product, modal, setModal }) {
               value={input.stock}
               onChange={(e) => handleChange(e)}
             />
+            {errors.name && <p className='danger'>{errors.stock}</p>}
           </div>
         </div>
         <div className='separador'>
           <div className='published'>
             <input
-              className='camposInput'
+              className={`camposInput  ${errors.published && 'danger'}`}
               placeholder='published'
               type='text'
               name='published'
@@ -164,24 +192,33 @@ function EditProduct({ product, modal, setModal }) {
               value={input.published}
               onChange={(e) => handleChange(e)}
             />
+            {errors.name && <p className='danger'>{errors.published}</p>}
           </div>
-          <div className='imageUrl'>
-            <button className='camposInput' id='upload_widget' onClick={() => showUploadWidget()}>
+          {/* <div className='imageUrl'>
+            <button
+              className={`camposInput  ${errors.image && 'danger'}`}
+              id='upload_widget'
+              onClick={() => showUploadWidget()}
+              name='image'
+              value={input.image}
+            >
               upload images
             </button>
-            {/* <img src={image} alt='' /> */}
-          </div>
+            <img src={image} alt='' />
+            {errors.name && <p className='danger'>{errors.image}</p>}
+          </div> */}
           <div className='description'>
             <textarea
-              className='camposInput'
+              className={`camposInput  ${errors.description && 'danger'}`}
               placeholder='descripcion'
               type='text-area'
               name='description'
               id='description'
               value={input.description}
               onChange={(e) => handleChange(e)}
-              rows='6'
+              rows='11'
             ></textarea>
+            {errors.name && <p className='danger'>{errors.description}</p>}
           </div>
         </div>
       </div>
